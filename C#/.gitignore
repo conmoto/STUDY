@@ -1,0 +1,5 @@
+# C# Language
+# Visual Studio ignore list
+**/bin/
+**/obj/
+**/.vs/
