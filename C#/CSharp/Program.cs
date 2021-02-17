@@ -80,9 +80,11 @@ namespace CSharp
             //랜덤 & 입력받기
             Random rand = new Random();
             int choice = rand.Next(0, 3);
-            
-            int input = Convert.ToInt32(Console.ReadLine());
-            string inputString = Console.ReadLine();
+            //int input = Convert.ToInt32(Console.ReadLine());
+            //string inputString = Console.ReadLine();
+
+            //OOP2 Test
+            OOP2.Run();
         }
     }
 }
