@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     /*** 이동 ***/
     // transform.position : world 좌표계
     // transform.TransformDirection() : local -> world
+        // ex) transform.TransformDirection(Vector3.forward) : local의 전방 벡터를 world로 변환
     // transform.InverseTransformDirection() : world -> local
     // transform.Translate() : local 좌표계 기준으로 이동
 
@@ -78,8 +79,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        Managers.Input.KeyAction -= OnKeyboard;
-    }
+    //private void OnDestroy()
+    //{
+    //    Managers.Input.KeyAction -= OnKeyboard;
+    //}
 }
