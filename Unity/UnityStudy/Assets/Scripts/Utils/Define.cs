@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Define
 {
+    public enum InputMode
+    {
+        Mouse,
+        Keyboard
+    }
+
     public enum MouseEvent
     {
         Press,
