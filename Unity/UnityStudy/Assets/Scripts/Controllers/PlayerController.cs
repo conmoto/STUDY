@@ -7,10 +7,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _speed = 5.0f;
 
+    bool _mouseMove = false;
+    Vector3 _destPos;
+
     void Start()
     {
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
+        Managers.Input.MouseAction -= OnMouseClicked;
+        Managers.Input.MouseAction += OnMouseClicked;
     }
 
     // GameObject(Player)
@@ -19,7 +24,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-   
+        if (_mouseMove)
+        {
+            Vector3 delta = _destPos - transform.position;
+            if (delta.magnitude < 0.0001f)
+            {
+                _mouseMove = false;
+            }
+            else
+            {
+                float moveDist = Mathf.Clamp(_speed * Time.deltaTime, 0, delta.magnitude);
+                transform.position += delta.normalized * moveDist;//위치 = 방향 * 속력 * 거리 = 속도 * 거리
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(delta), _speed * Time.deltaTime);  
+            }
+        }
+
     }
 
     //transform.gameObject 이 스크립트가 부착되어있는 게임 오브젝트
@@ -76,6 +95,26 @@ public class PlayerController : MonoBehaviour
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0.3f);
             transform.Translate(Vector3.forward * Time.deltaTime * _speed);
+        }
+
+        _mouseMove = false;
+    }
+
+    void OnMouseClicked(Define.MouseEvent evt)
+    {
+        if (evt != Define.MouseEvent.Click)
+            return;
+
+        //Raycasting
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.DrawRay(Camera.main.transform.position, ray.direction * 100.0f, Color.red, 1.0f);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100.0f, LayerMask.GetMask("Ground")))
+        {
+            _destPos = hit.point;
+            _mouseMove = true;
+            Debug.Log($"Raycast Camera @ {hit.collider.gameObject.name}");
         }
     }
 

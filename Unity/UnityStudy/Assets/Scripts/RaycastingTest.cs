@@ -11,23 +11,6 @@ public class RaycastingTest : MonoBehaviour
     /// </summary>
     
     // Collider가 부착된 Object만 Raycast 할 수 있다.
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            //LayerMask mask = LayerMask.GetMask("Player") | LayerMask.GetMask("Monster");
-            LayerMask mask = (1 << 6) | (1 << 7);
-
-            Debug.DrawRay(Camera.main.transform.position, ray.direction * 100.0f, Color.red, 1.0f);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100.0f, mask))
-            {
-                Debug.Log($"Raycast Camera @ {hit.collider.gameObject.name}");
-            }
-        }        
-    }
 
     void GetClickedObject()
     {
@@ -47,5 +30,20 @@ public class RaycastingTest : MonoBehaviour
         {
             Debug.Log($"Raycast Camera @ {hit.collider.gameObject.name}");
         }
+
+        //if(Input.GetMouseButtonDown(0))
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //    //LayerMask mask = LayerMask.GetMask("Player") | LayerMask.GetMask("Monster");
+        //    LayerMask mask = (1 << 6) | (1 << 7);
+
+        //    Debug.DrawRay(Camera.main.transform.position, ray.direction * 100.0f, Color.red, 1.0f);
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(ray, out hit, 100.0f, mask))
+        //    {
+        //        Debug.Log($"Raycast Camera @ {hit.collider.gameObject.name}");
+        //    }
+        //}
     }
 }
