@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 _destPos;
 
-    float wait_run_ratio = 0;
+    //float wait_run_ratio = 0;
 
     void Start()
     {
@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
             Managers.Input.MouseAction -= OnMouseClicked;
             Managers.Input.MouseAction += OnMouseClicked;
         }
+
+        Managers.Resource.Instantiate("UI/UI_Button");
     }
 
     public enum PlayerState
